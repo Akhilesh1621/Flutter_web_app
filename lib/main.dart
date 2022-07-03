@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
         //color palette is taken from palette.dart where color is created
         scaffoldBackgroundColor: Palette.scaffold,
       ),
-      home: HomeScreen(),
+      home: NavScreen(),
     );
   }
 }

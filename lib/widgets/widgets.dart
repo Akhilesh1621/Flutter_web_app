@@ -4,3 +4,4 @@ export 'TextButton.dart';
 export 'rooms.dart';
 export 'Stories.dart';
 export 'postContainer.dart';
+export 'customTabBar.dart';
