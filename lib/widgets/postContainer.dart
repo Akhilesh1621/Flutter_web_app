@@ -1,5 +1,6 @@
 import 'package:app/config/palette.dart';
 import 'package:app/widgets/profile_avatar.dart';
+import 'package:app/widgets/responsive.dart';
 import 'package:app/widgets/widgets.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -14,43 +15,53 @@ class PostContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 5.0),
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      color: Colors.white,
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                _PostHeader(post: post),
-                const SizedBox(
-                  height: 4.0,
-                ),
-                Text(post.caption),
-                post.imageUrl != null
-                    ? const SizedBox.shrink()
-                    : const SizedBox(
-                        height: 6.0,
-                      )
-              ],
-            ),
-          ),
-          post.imageUrl != null
-              ? Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
-                  child: CachedNetworkImage(
-                    imageUrl: post.imageUrl!,
+    final bool isDesktop = Responsive.isDesktop(context);
+    return Card(
+      margin: EdgeInsets.symmetric(
+          horizontal: isDesktop ? 5.0 : 0.0, vertical: 5.0),
+      elevation: isDesktop ? 1.0 : 0.0,
+      shape: RoundedRectangleBorder(
+        side: const BorderSide(color: Color(0xFFFFFFFF), width: 1),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Container(
+        margin: const EdgeInsets.symmetric(vertical: 5.0),
+        padding: const EdgeInsets.symmetric(vertical: 8.0),
+        color: Colors.white,
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  _PostHeader(post: post),
+                  const SizedBox(
+                    height: 4.0,
                   ),
-                )
-              : const SizedBox.shrink(),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12.0),
-            child: _PostStats(post: post),
-          )
-        ],
+                  Text(post.caption),
+                  post.imageUrl != null
+                      ? const SizedBox.shrink()
+                      : const SizedBox(
+                          height: 6.0,
+                        )
+                ],
+              ),
+            ),
+            post.imageUrl != null
+                ? Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8.0),
+                    child: CachedNetworkImage(
+                      imageUrl: post.imageUrl!,
+                    ),
+                  )
+                : const SizedBox.shrink(),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12.0),
+              child: _PostStats(post: post),
+            )
+          ],
+        ),
       ),
     );
   }
