@@ -144,8 +144,8 @@ class _HomeScreendesktop extends StatelessWidget {
         Flexible(
           flex: 2,
           child: Container(
-            color: Colors.orange,
-          ),
+              // color: Colors.orange,
+              ),
         ),
         const Spacer(),
         SizedBox(
